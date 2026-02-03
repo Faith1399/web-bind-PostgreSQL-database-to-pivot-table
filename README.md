@@ -1,47 +1,83 @@
-# How to bind PostgreSQL database to a Pivot Table
+# Bind PostgreSQL database to a Pivot Table
 
 A quick start project for connecting a PostgreSQL database to a Syncfusion Pivot Table. This repository includes a Web API Controller ([MyWebService](./MyWebService/)) for retrieving data from a PostgreSQL database, as well as quick start samples in the [TypeScript](./Typescript/), [JavaScript](./Javascript/), [Angular](./Angular/), [React](./React/), [VUE](./VUE/), ASP.NET [Core](./Core/), [Blazor](./Blazor/) and [MVC](./MVC/) platforms that display the retrieved data in a Syncfusion Pivot Table.
 
 ---
 
-## 🔎 Analysis Report
-- Repository: web-bind-PostgreSQL-database-to-pivot-table — https://github.com/SyncfusionExamples/web-bind-PostgreSQL-database-to-pivot-table
-- Detected languages: C#, JavaScript, TypeScript, HTML (server: .NET Web API; clients: JS/TS/Angular/React/Vue)
-- Repository type: Showcase / Educational sample (end-to-end demo)
-- Primary dependencies (inferred): Npgsql or Npgsql.EntityFrameworkCore.PostgreSQL, Microsoft.AspNetCore.* (server), @syncfusion/ej2-pivotview (clients), Node.js tooling
-- Maturity: Sample/demo — Stable as example code; not a production library
-- Community activity: Typical SyncfusionExamples pattern — low PR/issue volume; update cadence TBD
-- Documentation gaps: No consolidated README with SEO metadata, missing explicit dependency versions and CI badges, missing CONTRIBUTING/CODE_OF_CONDUCT
-- Recommended focus: Add dependency versions, quick start for each client, API contract, CORS and security notes, and GitHub topics
-
----
-
-## 🚀 Hero — What this repo does
-A compact, multi-framework sample showing how to expose PostgreSQL query results via a .NET Web API and bind the returned JSON to a Syncfusion Pivot Table (PivotView) on client apps (JS/TS/Angular/React/Vue, ASP.NET Core, Blazor, MVC).
-
----
-
 ## 📚 Table of Contents
-- ✅ Quick overview
-- ✨ Key features
-- 🛠️ Supported technologies & requirements
-- ⚙️ Installation & setup
-- 🧩 Quick code samples (3–5)
-- 🏗️ Project structure
-- ❓ Troubleshooting & FAQ
-- 🤝 Contributing & License
-- 🔎 SEO & GitHub metadata
+
+- [🔎 Project Overview](#-project-overview)
+- [🚀 Quick Start](#-quick-start)
+- [✨ Key Features](#-key-features)
+- [🛠️ Supported Technologies & Requirements](#️-supported-platforms--dependencies)
+- [⚙️ Installation & Setup (quick)](#-installation-setup)
+- [🧩 Quick Code Samples](#-quick-code-samples)
+- [🏗️ Project Structure](#-project-structure)
+- [❓ Troubleshooting & FAQ](troubleshooting--faq)
+- [🧪 Testing & CI](#-testing--ci)
+- [🤝 Contributing](#-contributing)
+- [📜 License & Support](#-license--support)
 
 ---
 
-## ✅ Quick overview
+## 🔎 Project Overview
 This project demonstrates the end-to-end flow: PostgreSQL → .NET Web API → Syncfusion PivotView. It helps developers build BI-style pivot reports using relational data served as JSON.
 
 Use cases: dashboards, ad-hoc reporting, analytics prototypes.
 
 ---
 
-## ✨ Key features
+## 🚀 Quick Start
+
+Prerequisites
+- .NET 6 SDK (or later)
+- PostgreSQL server with sample table (e.g., sales_table)
+- Node.js (for front-end samples)
+
+Run the Web API (`MyWebService`)
+
+```bash
+cd MyWebService
+dotnet restore
+dotnet run
+# API runs on the configured port (see Properties/launchSettings.json)
+```
+
+Run a front-end sample (choose one):
+
+TypeScript
+```bash
+cd Typescript/pivot-table
+npm install
+npm start
+```
+
+Angular
+```bash
+cd Angular/pivot-table
+npm install
+npm start
+```
+
+React
+```bash
+cd React/pivot-table
+npm install
+npm start
+```
+
+Vue
+```bash
+cd VUE/pivot-table
+npm install
+npm run dev
+```
+
+First success: Open the front-end sample URL (e.g., http://localhost:3000 or http://localhost:4200) and confirm the PivotView loads rows from the running Web API.
+
+---
+
+## ✨ Key Features
 - Server-side endpoint exposing PostgreSQL query results as JSON
 - Client examples across JS/TS/Angular/React/Vue and server-side (.NET Core/Blazor/MVC)
 - Appsettings sample for secure DB connection
@@ -52,11 +88,11 @@ Benefits: fast prototyping, multi-framework reference, reusable server + client 
 
 ---
 
-## 🛠️ Supported technologies & requirements
+## 🛠️ Supported Technologies & Requirements
 - .NET SDK 6.0+ (project files: MyWebService/*.csproj)
 - PostgreSQL 11+
 - Npgsql ADO.NET provider (or EF Core provider) — recommended Npgsql 7.x (align with .NET SDK)
-- Node.js 14+ for client samples
+- Node.js 20+ for client samples
 - Syncfusion EJ2 PivotView packages (npm / NuGet) — ensure license compliance
 - Modern browsers (Chrome, Edge, Firefox, Safari)
 
@@ -67,7 +103,7 @@ Suggested dependency examples:
 
 ---
 
-## ⚙️ Installation & setup (quick)
+## ⚙️ Installation & Setup (quick)
 Prerequisites:
 - PostgreSQL server with sample table (e.g., sales_table)
 - .NET SDK 6.0+
@@ -111,7 +147,7 @@ Tips:
 
 ---
 
-## 🧩 Quick code samples
+## 🧩 Quick Code Samples
 
 1) SQL example (sample table)
 ```sql
@@ -188,7 +224,7 @@ pivotTableObj.appendTo('#PivotView');
 
 ---
 
-## 🏗️ Project structure (high level)
+## 🏗️ Project Structure
 - MyWebService/ — .NET Web API (controllers, models, appsettings.json)
 - Typescript/ — TypeScript client demo
 - Javascript/ — Plain JS demo
@@ -206,53 +242,41 @@ pivotTableObj.appendTo('#PivotView');
 
 ---
 
-## 🤝 Contributing & license
-- Suggested files to add: CONTRIBUTING.md, CODE_OF_CONDUCT.md, ISSUE_TEMPLATEs, PR_TEMPLATE.
-- License: see LICENSE file.
+## 🧪 Testing & CI
 
-Minimal CONTRIBUTING.md outline (add to repo root):
-```markdown
-# 🤝 Contributing
-- Fork → feature branch → PR
-- Describe changes, tests, and run instructions
-- Keep PRs scoped and include screenshots or logs
-```
+- Add GitHub Actions to build the Web API and optionally run front-end builds per sample. Suggested jobs:
+	- `dotnet restore` / `dotnet build` / `dotnet test`
+	- `npm ci` / `npm run build` for front-end samples
 
 ---
 
-## 🔎 SEO & GitHub metadata (recommended)
-Repository description (<=160 chars):
-"Example showing how to bind a PostgreSQL database to a Syncfusion Pivot Table via a .NET Web API with JS/TS/Angular/React/Vue and .NET samples."
+## 🤝 Contributing
 
-Suggested topics (comma-separated):
-postgreSQL, syncfusion, pivot-table, pivotview, aspnet-core, dotnet, javascript, typescript, angular, react, vue, blazor, mvc, analytics, dashboard, sample
+Contributions welcome. Suggested workflow:
+1. Fork and create a branch `feature/<desc>`
+2. Run the Web API locally and test sample clients
+3. Open a PR with description, screenshots, and testing steps
 
-Primary keywords:
-- Syncfusion Pivot Table
-- PostgreSQL Pivot binding
-- PivotView PostgreSQL example
+## 📜 License & Support
 
-Secondary keywords:
-- .NET Web API Npgsql
-- Syncfusion EJ2 PivotView
-- analytics dashboard sample
+This is a **commercial product** subject to the Syncfusion End User License Agreement (EULA).
 
-Meta description (example):
-"Bind PostgreSQL to Syncfusion Pivot Table via .NET Web API — client samples for JS/TS/Angular/React/Vue + ASP.NET Core/Blazor/MVC."
+**Free Community License** is available for qualifying users/organizations:  
+- Annual gross revenue < $1 million USD  
+- 5 or fewer total developers  
+- 10 or fewer total employees  
 
-Structured data (JSON-LD) suggestion:
-- Add a simple JSON-LD snippet in docs/pages for richer search results (title, description, repo URL, license, author, keywords).
+The community license allows free use in both internal and commercial applications under these conditions.  
+No registration or approval is required — just comply with the terms.
 
----
+**Paid Licenses** are required for:  
+- Larger organizations  
+- Teams exceeding the community license limits  
+- Priority support, custom patches, or on-premise deployment options  
 
-## ✅ Next steps & recommendations
-- Add explicit dependency versions (csproj / package.json).
-- Add CI badge (GitHub Actions) and test coverage if applicable.
-- Add CONTRIBUTING.md, CODE_OF_CONDUCT.md, ISSUE/PR templates.
-- Provide sample dataset SQL and Postman collection for API testing.
-- Add live demo link or screenshots/GIFs demonstrating PivotView with sample data.
+Purchase options and pricing: https://www.syncfusion.com/sales/products  
+30-day free trial (full features, no credit card required): https://www.syncfusion.com/downloads/essential-js2  
+Community License details & FAQ: https://www.syncfusion.com/products/communitylicense  
+Full EULA: https://www.syncfusion.com/eula/es/
 
----
-
-## 📌 Last updated
-2026-02-03
+© 2026 Syncfusion, Inc. All Rights Reserved.
